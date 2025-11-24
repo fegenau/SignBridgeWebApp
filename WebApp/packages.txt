@@ -1,0 +1,4 @@
+apt-get update
+apt-get install -y libportaudio2 libportaudiocpp0 portaudio19-dev
+apt-get install -y espeak libespeak1 libespeak-dev
+apt-get install -y ffmpeg
