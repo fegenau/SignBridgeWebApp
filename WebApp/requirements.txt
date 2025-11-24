@@ -1,9 +1,30 @@
-streamlit>=1.28.0
-streamlit-webrtc>=0.47.0
-tensorflow>=2.13.0
-mediapipe>=0.10.0
-opencv-python>=4.8.0
-numpy>=1.24.0
-av>=10.0.0
-pyyaml>=6.0
-pyttsx3>=2.90
+# ============================================================================
+# SIGNBRIDGE - REQUIREMENTS
+# ============================================================================
+# Dependencias principales para la aplicación web de detección de lenguaje de señas
+# Versiones probadas y compatibles con Python 3.11
+
+# Framework Web
+streamlit>=1.28.0,<2.0.0
+streamlit-webrtc>=0.47.0,<1.0.0
+
+# Machine Learning & Deep Learning
+tensorflow>=2.13.0,<2.18.0
+mediapipe==0.10.14
+numpy>=1.24.0,<2.0.0
+
+# Procesamiento de Video
+opencv-python-headless>=4.8.0,<5.0.0
+av>=10.0.0,<17.0.0
+
+# Utilidades
+pyyaml>=6.0,<7.0
+
+# Text-to-Speech
+pyttsx3>=2.90,<3.0
+
+# Dependencias adicionales (instaladas automáticamente pero listadas para referencia)
+# protobuf>=3.20.0,<5.0.0
+# pillow>=9.0.0
+# altair>=4.0.0
+# pandas>=1.3.0
