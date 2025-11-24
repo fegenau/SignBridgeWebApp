@@ -6,11 +6,14 @@ Aplicación web multi-página en tiempo real para detección de lenguaje de señ
 
 - ✅ **Aplicación multi-página** con navegación intuitiva
 - ✅ **Detección en tiempo real** usando tu cámara web
-- ✅ **67 señas detectables**: Números (0-9), letras (A-Z) y 31 frases comunes
-- ✅ **Diccionario completo** con todas las señas organizadas
+- ✅ **67 señas detectables**: Números (1-10), letras (A-Z, Ñ, LL, RR) y frases comunes
+- ✅ **Text-to-Speech (TTS)** integrado con acumulación de señas
+- ✅ **Traductor de texto a señas** con visualización de imágenes
+- ✅ **Diccionario completo** con imágenes reales de todas las señas
+- ✅ **Diseño responsivo** adaptado a móvil, tablet y desktop
 - ✅ **Configuración avanzada** de parámetros de detección
 - ✅ **Sin conversión del modelo**: Usa `best_model.keras` directamente
-- ✅ **Interfaz moderna** con diseño profesional
+- ✅ **Interfaz moderna** con logo personalizado SignBridge
 - ✅ **WebRTC nativo** para streaming fluido
 - ✅ **Predicciones estables** con sistema de suavizado adaptativo
 
@@ -24,15 +27,22 @@ Aplicación web multi-página en tiempo real para detección de lenguaje de señ
 ### 📹 Detección
 - Cámara en tiempo real con WebRTC
 - Detección de señas con predicción en vivo
+- **Sistema TTS integrado**:
+  - Acumulación automática de hasta 5 señas
+  - Reproducción de frases completas con botón
+  - Historial de sesión completo
+  - Controles de buffer (borrar última, limpiar todo)
 - Indicadores visuales de estado
 - Información del modelo en sidebar
 
 ### 📚 Diccionario
-- Visualización de todas las 67 señas
+- **Visualización de todas las 67 señas con imágenes reales**
+- **Traductor de texto a señas**: Escribe una palabra y ve su traducción visual
 - Filtros por categoría (Números, Letras, Frases)
 - Filtros por tipo (Estáticas, Dinámicas)
 - Búsqueda de señas
-- Grid organizado con cards
+- Grid organizado con cards responsivas
+- Imágenes centradas y optimizadas
 
 ### ⚙️ Configuración
 - **Detección**: Ajusta secuencia, suavizado, confianza, tolerancia
@@ -121,10 +131,12 @@ La aplicación se abrirá automáticamente en tu navegador en `http://localhost:
 ## 📊 Señas Detectables
 
 ### Números (10)
-`0, 1, 2, 3, 4, 5, 6, 7, 8, 9`
+`1, 2, 3, 4, 5, 6, 7, 8, 9, 10`
 
-### Letras (26)
-`A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z`
+*Nota: El número 0 está disponible en detección pero no se muestra en el diccionario.*
+
+### Letras (29)
+`A, B, C, D, E, F, G, H, I, J, K, L, LL, M, N, Ñ, O, P, Q, R, RR, S, T, U, V, W, X, Y, Z`
 
 ### Frases Comunes (31)
 - **Preguntas**: Por_que, Quien, Como, Cuando, Donde, Cuantos, Que_quieres
@@ -141,17 +153,25 @@ WebApp/
 ├── app.py                           # Página de inicio con navegación
 ├── config.py                        # Configuración centralizada
 ├── requirements.txt                 # Dependencias de Python
+├── packages.txt                     # Dependencias del sistema (para deployment)
+├── .python-version                  # Versión de Python para Streamlit Cloud
 ├── README.md                        # Este archivo
 ├── start.ps1                        # Script de inicio rápido
+├── .streamlit/                      # Configuración de Streamlit
+│   └── config.toml                  # Config para deployment
 ├── pages/                           # Páginas de la aplicación
-│   ├── 1_📹_Detección.py           # Página de detección con cámara
-│   ├── 2_📚_Diccionario.py         # Diccionario de señas
+│   ├── 1_📹_Detección.py           # Página de detección con cámara y TTS
+│   ├── 2_📚_Diccionario.py         # Diccionario y traductor de señas
 │   └── 3_⚙️_Configuración.py       # Configuración del sistema
 ├── utils/                           # Utilidades compartidas
 │   ├── __init__.py                 # Inicialización del paquete
 │   ├── keypoint_extractor.py       # Extracción de keypoints con MediaPipe
 │   └── model_loader.py             # Carga del modelo y clases
-└── assets/                          # Recursos (imágenes, etc.)
+└── assets/                          # Recursos
+    ├── Imagenes/
+    │   ├── Diccionario/             # Imágenes de señas (A-Z, 1-10)
+    │   └── Logo/                    # Logo de SignBridge
+    └── responsive.css               # Estilos responsivos
 ```
 
 ## ⚙️ Configuración Avanzada
@@ -164,6 +184,13 @@ WebApp/
 - `MIN_CONFIDENCE`: Confianza mínima para predicción (default: 0.65)
 - `CONFIDENCE_THRESHOLD`: Umbral para confirmar predicción (default: 0.75)
 - `REQUIRED_STABLE_FRAMES`: Frames estables requeridos (default: 3)
+
+**TTS (Text-to-Speech):**
+- `ENABLE_TTS`: Activar/desactivar TTS (default: True)
+- `SIGN_BUFFER_SIZE`: Tamaño del buffer de señas (default: 5)
+- `TTS_RATE`: Velocidad de reproducción (default: 150 palabras/min)
+- `TTS_VOLUME`: Volumen (default: 0.9)
+- `TTS_VOICE_INDEX`: Índice de voz (default: 0)
 
 **Tolerancia:**
 - `MAX_MISSING_FRAMES`: Tolerancia sin manos (default: 5 frames)
@@ -228,31 +255,98 @@ O usa el script de inicio:
 .\start.ps1
 ```
 
-### Opción 2: Streamlit Cloud (gratis)
-1. Sube el proyecto a GitHub
-2. Conecta tu repositorio en [share.streamlit.io](https://share.streamlit.io)
-3. Configura las rutas del modelo correctamente
-4. Asegúrate de incluir el modelo en el repositorio o usar Git LFS
+### Opción 2: Streamlit Community Cloud (Recomendado - Gratis)
+
+**Requisitos previos:**
+1. Cuenta en GitHub
+2. Repositorio con el código
+3. Modelo subido al repositorio (o usar Git LFS si >100MB)
+
+**Archivos necesarios:**
+- `.python-version` - Especifica Python 3.11 (compatible con mediapipe)
+- `.streamlit/config.toml` - Configuración de Streamlit
+- `requirements.txt` - Dependencias Python actualizadas
+- `packages.txt` - Dependencias del sistema (espeak, ffmpeg, etc.)
+
+**Pasos:**
+1. Sube tu código a GitHub:
+   ```bash
+   git add .
+   git commit -m "Deploy to Streamlit Cloud"
+   git push origin main
+   ```
+
+2. Ve a [share.streamlit.io](https://share.streamlit.io)
+
+3. Conecta tu repositorio de GitHub
+
+4. Configura:
+   - **Main file path**: `WebApp/app.py`
+   - **Python version**: 3.11 (automático con `.python-version`)
+
+5. Presiona "Deploy"
+
+**Notas importantes:**
+- ⚠️ TTS puede no funcionar en Streamlit Cloud (sin acceso a audio del servidor)
+- ⚠️ Modelo debe estar en el repo o usar Git LFS para archivos >100MB
+- ✅ Límite: 1GB RAM (suficiente para la app)
+- ✅ Actualización automática al hacer push a GitHub
 
 ### Opción 3: Hugging Face Spaces
 1. Crea un Space en [huggingface.co/spaces](https://huggingface.co/spaces)
-2. Sube el código y el modelo
-3. Configura como aplicación Streamlit
-4. Ajusta las rutas en `config.py` si es necesario
+2. Selecciona "Streamlit" como SDK
+3. Sube el código y el modelo
+4. Configura `app_file` como `WebApp/app.py`
+5. Ajusta las rutas en `config.py` si es necesario
 
-### Opción 4: Docker
+**Ventajas:**
+- ✅ 16GB RAM en plan gratuito
+- ✅ Mejor para modelos grandes
+- ✅ Comunidad ML/AI
+
+### Opción 4: Railway
+1. Conecta tu repositorio de GitHub
+2. Railway detecta automáticamente Streamlit
+3. Configura variables de entorno si es necesario
+4. Deploy automático
+
+**Ventajas:**
+- ✅ $5 gratis al mes
+- ✅ Fácil configuración
+- ✅ Escalable
+
+### Opción 5: Docker
 ```dockerfile
-FROM python:3.10-slim
+FROM python:3.11-slim
+
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    libportaudio2 \
+    libportaudiocpp0 \
+    portaudio19-dev \
+    espeak \
+    libespeak1 \
+    libespeak-dev \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
+
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
+
 EXPOSE 8501
-CMD ["streamlit", "run", "app.py"]
+
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
 ```
 
-### Opción 5: Servidor propio
-Despliega directamente en un servidor con Python usando systemd o supervisor para mantener la aplicación corriendo.
+Build y run:
+```bash
+docker build -t signbridge .
+docker run -p 8501:8501 signbridge
+```
 
 ## 📝 Notas Técnicas
 
@@ -278,16 +372,42 @@ La aplicación usa **exactamente la misma lógica** que el script `Inferir.py` o
 - **Latencia**: <100ms desde detección hasta predicción
 - **Memoria**: ~500MB con todas las dependencias
 
-## 🚀 Próximas Mejoras
+## 🚀 Nuevas Funcionalidades Implementadas
 
-- [ ] Agregar imágenes reales de señas al diccionario
+### ✅ Text-to-Speech (TTS)
+- Sistema de acumulación de hasta 5 señas
+- Reproducción de frases completas
+- Historial de sesión completo
+- Controles de buffer (borrar última, limpiar)
+- Actualización automática de UI
+
+### ✅ Traductor de Texto a Señas
+- Escribe una palabra o frase
+- Visualización automática con imágenes
+- Imágenes responsivas y centradas
+- Separador visual para espacios
+
+### ✅ Diccionario con Imágenes Reales
+- 39 imágenes de señas (A-Z, Ñ, LL, RR, 1-10)
+- Imágenes optimizadas y recortadas
+- Tamaño uniforme (200px)
+- Centradas y responsivas
+
+### ✅ Diseño Responsivo
+- Adaptado a móvil, tablet y desktop
+- Breakpoints: 768px (tablet), 1024px (desktop)
+- Imágenes y textos escalables
+- Logo personalizado SignBridge
+
+## 🔮 Próximas Mejoras
+
+- [ ] Agregar más imágenes de frases al diccionario
 - [ ] Implementar guardado persistente de configuración
-- [ ] Añadir historial de predicciones
+- [ ] Añadir estadísticas de uso
 - [ ] Exportar resultados a archivo
 - [ ] Soporte multi-idioma
-- [ ] Text-to-speech para predicciones
 - [ ] Grabación de sesiones
-- [ ] Estadísticas de uso
+- [ ] API REST para integración externa
 
 ## 🤝 Contribuciones
 
