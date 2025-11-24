@@ -65,7 +65,7 @@ El script automáticamente:
 #### 1. Navegar al directorio del proyecto
 
 ```powershell
-cd C:\Users\matia\Documents\SignBridgeKeras\WebApp
+cd C:\Users\usuario\Documents\SignBridgeKeras\WebApp
 ```
 
 #### 2. Crear un entorno virtual (recomendado)
