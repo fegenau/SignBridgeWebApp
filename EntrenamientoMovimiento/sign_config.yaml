@@ -1,0 +1,91 @@
+sequence_length: 24
+capture_fps: 24
+classes:
+# Números (10 dígitos)
+- '0'
+- '1'
+- '2'
+- '3'
+- '4'
+- '5'
+- '6'
+- '7'
+- '8'
+- '9'
+# Abecedario (26 letras)
+- A
+- B
+- C
+- D
+- E
+- F
+- G
+- H
+- I
+- J
+- K
+- L
+- M
+- N
+- O
+- P
+- Q
+- R
+- S
+- T
+- U
+- V
+- W
+- X
+- Y
+- Z
+# Palabras/frases comunes (32 expresiones)
+- Por_que
+- Quien
+- Como
+- Cuando
+- Donde
+- Cuantos
+- Que_quieres
+- No_lo_se
+- Si
+- No
+- Tal_vez
+- No_lo_recuerdo
+- Repite_por_favor
+- A_la_derecha
+- A_la_izquierda
+- En_la_entrada
+- Al_final_del_pasillo
+- En_el_segundo_piso
+- En_el_edificio
+- Por_las_escaleras
+- Por_el_ascensor
+- Hola
+- Adios
+- Como_te_llamas
+- Permiso
+- Nos_vemos
+- Mi_casa
+- Como_estas
+- Gracias
+- Por_favor
+- Cuidate
+- Mi_nombre
+samples_per_class: 30
+use_face: false
+use_pose: false
+use_hands: true
+train:
+  batch_size: 64
+  epochs: 40
+  val_split: 0.15
+  learning_rate: 0.001
+  patience: 8
+  l2: 1.0e-05
+  dropout: 0.3
+  augment: true
+inference:
+  smooth_window: 8
+  min_conf: 0.5
+  show_prob: true

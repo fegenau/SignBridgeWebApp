@@ -1,0 +1,99 @@
+/* ============================================================================
+   ESTILOS RESPONSIVOS PARA SIGNBRIDGE
+   ============================================================================ */
+
+/* Variables CSS para diferentes breakpoints */
+:root {
+    --mobile: 480px;
+    --tablet: 768px;
+    --desktop: 1024px;
+    --desktop-lg: 1440px;
+}
+
+/* ============================================================================
+   ESTILOS BASE - MOBILE FIRST
+   ============================================================================ */
+
+/* Contenedor principal */
+.main .block-container {
+    padding: 1rem !important;
+    max-width: 100% !important;
+}
+
+/* Botones responsivos */
+button {
+    font-size: 14px !important;
+    padding: 0.5rem 1rem !important;
+}
+
+/* Imágenes responsivas */
+img {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* ============================================================================
+   TABLET (768px+)
+   ============================================================================ */
+@media (min-width: 768px) {
+    .main .block-container {
+        padding: 2rem !important;
+        max-width: 95% !important;
+    }
+    
+    button {
+        font-size: 16px !important;
+    }
+}
+
+/* ============================================================================
+   DESKTOP (1024px+)
+   ============================================================================ */
+@media (min-width: 1024px) {
+    .main .block-container {
+        padding: 3rem !important;
+        max-width: 1200px !important;
+    }
+}
+
+/* ============================================================================
+   DESKTOP LARGE (1440px+)
+   ============================================================================ */
+@media (min-width: 1440px) {
+    .main .block-container {
+        max-width: 1400px !important;
+    }
+}
+
+/* ============================================================================
+   AJUSTES ESPECÍFICOS PARA MÓVIL
+   ============================================================================ */
+@media (max-width: 767px) {
+    /* Ocultar sidebar en móvil */
+    section[data-testid="stSidebar"] {
+        display: none;
+    }
+    
+    /* Ajustar columnas en móvil */
+    .row-widget.stHorizontal {
+        flex-direction: column !important;
+    }
+    
+    /* Métricas más pequeñas */
+    [data-testid="stMetricValue"] {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Títulos más pequeños */
+    h1 {
+        font-size: 1.8rem !important;
+    }
+    
+    h2 {
+        font-size: 1.4rem !important;
+    }
+    
+    h3 {
+        font-size: 1.2rem !important;
+    }
+}
