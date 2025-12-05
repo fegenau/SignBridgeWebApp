@@ -1,0 +1,341 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <!-- Definiciones de gradientes y efectos -->
+  <defs>
+    <!-- Gradientes de fondo -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0c29;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#302b63;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#24243e;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente para Cliente -->
+    <linearGradient id="clientGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente para Streamlit -->
+    <linearGradient id="streamlitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente para Presentación -->
+    <linearGradient id="presentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente para Procesamiento -->
+    <linearGradient id="processGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente para Servicios -->
+    <linearGradient id="servicesGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fa709a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fee140;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente para Infraestructura -->
+    <linearGradient id="infraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#30cfd0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#330867;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente para Repositorio -->
+    <linearGradient id="repoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8edea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fed6e3;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Sombras y efectos -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Flechas modernas -->
+    <marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 L4,6 L2,2" fill="#4facfe" />
+    </marker>
+    
+    <marker id="arrowGreen" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 L4,6 L2,2" fill="#43e97b" />
+    </marker>
+    
+    <marker id="arrowPink" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 L4,6 L2,2" fill="#fa709a" />
+    </marker>
+    
+    <marker id="arrowCyan" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 L4,6 L2,2" fill="#30cfd0" />
+    </marker>
+  </defs>
+
+  <!-- Fondo -->
+  <rect x="0" y="0" width="1600" height="900" fill="url(#bgGradient)" />
+  
+  <!-- Patrón de puntos decorativo -->
+  <g opacity="0.1">
+    <circle cx="100" cy="100" r="3" fill="#ffffff"/>
+    <circle cx="200" cy="150" r="3" fill="#ffffff"/>
+    <circle cx="1400" cy="120" r="3" fill="#ffffff"/>
+    <circle cx="1500" cy="200" r="3" fill="#ffffff"/>
+    <circle cx="150" cy="800" r="3" fill="#ffffff"/>
+    <circle cx="1450" cy="850" r="3" fill="#ffffff"/>
+  </g>
+
+  <!-- Estilos de texto -->
+  <style>
+    .title { 
+      font: bold 36px 'Segoe UI', Arial, sans-serif; 
+      fill: #ffffff; 
+      letter-spacing: 1px;
+    }
+    .subtitle { 
+      font: 18px 'Segoe UI', Arial, sans-serif; 
+      fill: #b8b8d1; 
+    }
+    .boxTitle { 
+      font: bold 18px 'Segoe UI', Arial, sans-serif; 
+      fill: #ffffff; 
+    }
+    .label { 
+      font: 14px 'Segoe UI', Arial, sans-serif; 
+      fill: #ffffff; 
+      opacity: 0.95;
+    }
+    .small { 
+      font: 12px 'Segoe UI', Arial, sans-serif; 
+      fill: #ffffff; 
+      opacity: 0.85;
+    }
+    .tech { 
+      font: italic 11px 'Segoe UI', Arial, sans-serif; 
+      fill: #ffffff; 
+      opacity: 0.7;
+    }
+    .connection-label {
+      font: bold 11px 'Segoe UI', Arial, sans-serif;
+      fill: #ffffff;
+      background: rgba(0,0,0,0.5);
+    }
+  </style>
+
+  <!-- Título principal -->
+  <text x="800" y="60" text-anchor="middle" class="title">
+    🌉 SignBridge Architecture
+  </text>
+  <text x="800" y="90" text-anchor="middle" class="subtitle">
+    Real-time Sign Language Detection System
+  </text>
+
+  <!-- CLIENTE -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="180" width="280" height="240" rx="20" ry="20" 
+          fill="url(#clientGrad)" opacity="0.95"/>
+    <rect x="85" y="185" width="270" height="230" rx="18" ry="18" 
+          fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+    
+    <!-- Icono de usuario -->
+    <circle cx="220" cy="230" r="25" fill="#ffffff" opacity="0.2"/>
+    <circle cx="220" cy="225" r="12" fill="#ffffff" opacity="0.9"/>
+    <path d="M 200 245 Q 220 235 240 245" stroke="#ffffff" stroke-width="3" 
+          fill="none" opacity="0.9" stroke-linecap="round"/>
+    
+    <text x="220" y="275" text-anchor="middle" class="boxTitle">👤 Cliente</text>
+    <text x="220" y="300" text-anchor="middle" class="label">Navegador Web</text>
+    <text x="220" y="320" text-anchor="middle" class="small">📹 Webcam + 🔊 Audio</text>
+    <text x="220" y="340" text-anchor="middle" class="small">Interfaz Multipágina</text>
+    <text x="220" y="360" text-anchor="middle" class="tech">Inicio | Detección</text>
+    <text x="220" y="375" text-anchor="middle" class="tech">Diccionario | Config</text>
+  </g>
+
+  <!-- STREAMLIT APP (Contenedor principal) -->
+  <g filter="url(#shadow)">
+    <rect x="420" y="140" width="720" height="450" rx="25" ry="25" 
+          fill="url(#streamlitGrad)" opacity="0.15"/>
+    <rect x="425" y="145" width="710" height="440" rx="23" ry="23" 
+          fill="none" stroke="#f5576c" stroke-width="2.5" opacity="0.6"/>
+    
+    <text x="780" y="175" text-anchor="middle" class="boxTitle">
+      🚀 Servidor Streamlit
+    </text>
+  </g>
+
+  <!-- Capa de Presentación -->
+  <g filter="url(#shadow)">
+    <rect x="450" y="210" width="310" height="350" rx="18" ry="18" 
+          fill="url(#presentGrad)" opacity="0.95"/>
+    <rect x="455" y="215" width="300" height="340" rx="16" ry="16" 
+          fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+    
+    <!-- Icono de layout -->
+    <rect x="585" y="240" width="40" height="30" rx="4" fill="#ffffff" opacity="0.2"/>
+    <rect x="590" y="245" width="12" height="20" rx="2" fill="#ffffff" opacity="0.8"/>
+    <rect x="605" y="245" width="15" height="20" rx="2" fill="#ffffff" opacity="0.8"/>
+    
+    <text x="605" y="295" text-anchor="middle" class="boxTitle">🎨 Presentación</text>
+    <text x="605" y="320" text-anchor="middle" class="label">app.py + pages/</text>
+    <text x="605" y="340" text-anchor="middle" class="small">📱 Navegación multipágina</text>
+    <text x="605" y="360" text-anchor="middle" class="small">🎯 Layouts & Grids</text>
+    <text x="605" y="380" text-anchor="middle" class="small">🎮 Controles de usuario</text>
+    <text x="605" y="400" text-anchor="middle" class="small">✨ Componentes UI</text>
+    <text x="605" y="420" text-anchor="middle" class="tech">responsive.css</text>
+    <text x="605" y="435" text-anchor="middle" class="tech">st.session_state</text>
+  </g>
+
+  <!-- Procesamiento + IA -->
+  <g filter="url(#shadow)">
+    <rect x="790" y="210" width="320" height="350" rx="18" ry="18" 
+          fill="url(#processGrad)" opacity="0.95"/>
+    <rect x="795" y="215" width="310" height="340" rx="16" ry="16" 
+          fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+    
+    <!-- Icono de IA -->
+    <circle cx="950" cy="255" r="20" fill="#ffffff" opacity="0.2"/>
+    <path d="M 940 255 L 950 245 L 960 255 L 950 265 Z" fill="#ffffff" opacity="0.9"/>
+    <circle cx="945" cy="250" r="3" fill="#38f9d7"/>
+    <circle cx="955" cy="250" r="3" fill="#38f9d7"/>
+    <circle cx="950" cy="260" r="3" fill="#38f9d7"/>
+    
+    <text x="950" y="295" text-anchor="middle" class="boxTitle">🧠 Procesamiento IA</text>
+    <text x="950" y="320" text-anchor="middle" class="label">WebRTC Stream</text>
+    <text x="950" y="340" text-anchor="middle" class="small">✋ MediaPipe Hands</text>
+    <text x="950" y="360" text-anchor="middle" class="small">📊 Extracción Keypoints</text>
+    <text x="950" y="380" text-anchor="middle" class="small">🎬 Secuencias (24 frames)</text>
+    <text x="950" y="400" text-anchor="middle" class="small">📈 Suavizado temporal</text>
+    <text x="950" y="420" text-anchor="middle" class="small">🎯 Tolerancias adaptativas</text>
+    <text x="950" y="440" text-anchor="middle" class="tech">best_model.keras</text>
+    <text x="950" y="455" text-anchor="middle" class="tech">Label Encoder</text>
+  </g>
+
+  <!-- Servicios de Apoyo -->
+  <g filter="url(#shadow)">
+    <rect x="1180" y="180" width="340" height="220" rx="18" ry="18" 
+          fill="url(#servicesGrad)" opacity="0.95"/>
+    <rect x="1185" y="185" width="330" height="210" rx="16" ry="16" 
+          fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+    
+    <!-- Icono de servicios -->
+    <circle cx="1350" cy="220" r="18" fill="#ffffff" opacity="0.2"/>
+    <path d="M 1350 210 L 1350 230 M 1340 220 L 1360 220" stroke="#ffffff" 
+          stroke-width="3" opacity="0.9" stroke-linecap="round"/>
+    
+    <text x="1350" y="255" text-anchor="middle" class="boxTitle">⚙️ Servicios</text>
+    <text x="1350" y="280" text-anchor="middle" class="label">🔊 Text-to-Speech</text>
+    <text x="1350" y="300" text-anchor="middle" class="small">📦 Buffer señas (max 5)</text>
+    <text x="1350" y="320" text-anchor="middle" class="small">📜 Historial sesión</text>
+    <text x="1350" y="340" text-anchor="middle" class="small">📚 Diccionario visual</text>
+    <text x="1350" y="360" text-anchor="middle" class="tech">assets/Imagenes</text>
+    <text x="1350" y="375" text-anchor="middle" class="tech">Logo & Resources</text>
+  </g>
+
+  <!-- Infraestructura -->
+  <g filter="url(#shadow)">
+    <rect x="1180" y="430" width="340" height="160" rx="18" ry="18" 
+          fill="url(#infraGrad)" opacity="0.95"/>
+    <rect x="1185" y="435" width="330" height="150" rx="16" ry="16" 
+          fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+    
+    <!-- Icono de cloud -->
+    <ellipse cx="1350" cy="465" rx="25" ry="12" fill="#ffffff" opacity="0.2"/>
+    <ellipse cx="1335" cy="470" rx="18" ry="10" fill="#ffffff" opacity="0.3"/>
+    <ellipse cx="1365" cy="470" rx="18" ry="10" fill="#ffffff" opacity="0.3"/>
+    
+    <text x="1350" y="500" text-anchor="middle" class="boxTitle">☁️ Infraestructura</text>
+    <text x="1350" y="525" text-anchor="middle" class="label">Despliegue</text>
+    <text x="1350" y="545" text-anchor="middle" class="small">💻 Local: streamlit run</text>
+    <text x="1350" y="565" text-anchor="middle" class="tech">Streamlit Cloud | HF Spaces | Docker</text>
+  </g>
+
+  <!-- Repositorio -->
+  <g filter="url(#shadow)">
+    <rect x="420" y="640" width="380" height="140" rx="18" ry="18" 
+          fill="url(#repoGrad)" opacity="0.95"/>
+    <rect x="425" y="645" width="370" height="130" rx="16" ry="16" 
+          fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+    
+    <!-- Icono de GitHub -->
+    <circle cx="610" cy="680" r="20" fill="#24292e" opacity="0.8"/>
+    <path d="M 610 670 Q 605 675 610 680 Q 615 675 610 670" fill="#ffffff" opacity="0.9"/>
+    
+    <text x="610" y="720" text-anchor="middle" class="boxTitle">📦 Repositorio</text>
+    <text x="610" y="745" text-anchor="middle" class="label">GitHub Repository</text>
+    <text x="610" y="765" text-anchor="middle" class="tech">WebApp | Modelo | Assets</text>
+  </g>
+
+  <!-- CONEXIONES ANIMADAS -->
+  
+  <!-- Cliente -> Streamlit -->
+  <path d="M 360 300 Q 390 300 420 300" fill="none" stroke="url(#presentGrad)" 
+        stroke-width="3" marker-end="url(#arrowBlue)" opacity="0.8"/>
+  <rect x="365" y="270" width="70" height="20" rx="10" fill="rgba(79, 172, 254, 0.3)"/>
+  <text x="400" y="283" text-anchor="middle" class="connection-label">HTTP</text>
+  <rect x="365" y="305" width="70" height="20" rx="10" fill="rgba(79, 172, 254, 0.3)"/>
+  <text x="400" y="318" text-anchor="middle" class="connection-label">WebRTC</text>
+
+  <!-- Presentación -> Procesamiento -->
+  <path d="M 760 385 L 790 385" fill="none" stroke="url(#processGrad)" 
+        stroke-width="3" marker-end="url(#arrowGreen)" opacity="0.8"/>
+  <rect x="745" y="360" width="70" height="18" rx="9" fill="rgba(67, 233, 123, 0.3)"/>
+  <text x="780" y="372" text-anchor="middle" class="connection-label">Frames</text>
+
+  <!-- Procesamiento -> Servicios -->
+  <path d="M 1110 320 Q 1145 300 1180 290" fill="none" stroke="url(#servicesGrad)" 
+        stroke-width="3" marker-end="url(#arrowPink)" opacity="0.8"/>
+  <rect x="1115" y="285" width="80" height="18" rx="9" fill="rgba(250, 112, 154, 0.3)"/>
+  <text x="1155" y="297" text-anchor="middle" class="connection-label">Predicción</text>
+
+  <!-- Servicios -> Cliente (feedback) -->
+  <path d="M 1180 250 Q 800 150 360 250" fill="none" stroke="#fa709a" 
+        stroke-width="2.5" stroke-dasharray="8 4" marker-end="url(#arrowPink)" opacity="0.6"/>
+  <rect x="730" y="135" width="100" height="18" rx="9" fill="rgba(250, 112, 154, 0.3)"/>
+  <text x="780" y="147" text-anchor="middle" class="connection-label">Audio + UI</text>
+
+  <!-- Streamlit -> Infra -->
+  <path d="M 1140 450 L 1180 480" fill="none" stroke="url(#infraGrad)" 
+        stroke-width="3" stroke-dasharray="6 3" marker-end="url(#arrowCyan)" opacity="0.7"/>
+  <rect x="1120" y="445" width="90" height="18" rx="9" fill="rgba(48, 207, 208, 0.3)"/>
+  <text x="1165" y="457" text-anchor="middle" class="connection-label">Deploy</text>
+
+  <!-- Repo -> Infra -->
+  <path d="M 800 710 Q 1000 650 1180 550" fill="none" stroke="url(#infraGrad)" 
+        stroke-width="3" stroke-dasharray="6 3" marker-end="url(#arrowCyan)" opacity="0.7"/>
+  <rect x="950" y="615" width="100" height="18" rx="9" fill="rgba(48, 207, 208, 0.3)"/>
+  <text x="1000" y="627" text-anchor="middle" class="connection-label">CI/CD Pipeline</text>
+
+  <!-- Decoración: líneas de flujo de datos -->
+  <g opacity="0.15">
+    <circle cx="390" cy="300" r="4" fill="#4facfe">
+      <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1150" cy="300" r="4" fill="#fa709a">
+      <animate attributeName="r" values="4;8;4" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0.5;1" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Footer -->
+  <text x="800" y="870" text-anchor="middle" class="tech" opacity="0.5">
+    Powered by Streamlit • MediaPipe • Keras • Python
+  </text>
+</svg>

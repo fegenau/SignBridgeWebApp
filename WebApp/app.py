@@ -154,7 +154,7 @@ with col1:
     </div>
     """, unsafe_allow_html=True)
     
-    if st.button("🎥 Ir a Detectar", key="detect", use_container_width=True, type="primary"):
+    if st.button("🎥 Ir a Detectar", key="detect", width='stretch', type="primary"):
         st.switch_page("pages/1_📹_Detección.py")
 
 with col2:
@@ -165,7 +165,7 @@ with col2:
     </div>
     """, unsafe_allow_html=True)
     
-    if st.button("📖 Ver Diccionario", key="dictionary", use_container_width=True, type="primary"):
+    if st.button("📖 Ver Diccionario", key="dictionary", width='stretch', type="primary"):
         st.switch_page("pages/2_📚_Diccionario.py")
 
 with col3:
@@ -176,7 +176,7 @@ with col3:
     </div>
     """, unsafe_allow_html=True)
     
-    if st.button("🔧 Configuración", key="settings", use_container_width=True, type="primary"):
+    if st.button("🔧 Configuración", key="settings", width='stretch', type="primary"):
         st.switch_page("pages/3_⚙️_Configuración.py")
 
 # Características principales

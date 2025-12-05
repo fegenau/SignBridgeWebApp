@@ -135,3 +135,21 @@ TTS_VOLUME = 0.9
 
 # Índice de voz (0 = predeterminada del sistema)
 TTS_VOICE_INDEX = 0
+
+# ============================================================================
+# GESTIÓN DE MEMORIA
+# ============================================================================
+
+# Tamaño máximo del historial de sesión (evita crecimiento ilimitado)
+MAX_SESSION_HISTORY = 100
+
+# Intervalo de limpieza de frames (libera recursos cada N frames)
+FRAME_CLEANUP_INTERVAL = 100
+
+# Habilitar salto de frames para reducir carga de procesamiento
+# Habilitar salto de frames para reducir carga de procesamiento
+ENABLE_FRAME_SKIP = False
+
+# Procesar cada N frames (1 = todos, 2 = saltar uno de cada dos)
+FRAME_SKIP_RATE = 1
+

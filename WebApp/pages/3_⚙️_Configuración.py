@@ -375,7 +375,7 @@ def main():
     st.markdown("---")
     col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        if st.button("💾 Guardar Configuración", use_container_width=True, type="primary"):
+        if st.button("💾 Guardar Configuración", width='stretch', type="primary"):
             st.success("✅ Configuración guardada (funcionalidad en desarrollo)")
             st.info("ℹ️ Los cambios se aplicarán en la próxima sesión")
 

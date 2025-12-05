@@ -107,17 +107,22 @@ class SignLanguageProcessor(VideoProcessorBase):
         self.hands_detected = False
         self.hands_quality = 0.0
         self.status_message = "Iniciando..."
+        self.last_results = None  # Para frame skipping
         
         # 🆕 Sistema de acumulación de señas para TTS
         self.sign_buffer = deque(maxlen=config.SIGN_BUFFER_SIZE)
         self.last_added_sign = None
         
-        # 🆕 Historial de sesión (todas las señas detectadas)
-        self.session_history = []
+        # 🆕 Historial de sesión (limitado para evitar consumo excesivo de memoria)
+        self.session_history = deque(maxlen=config.MAX_SESSION_HISTORY)
         
         # 🆕 Control de TTS (no inicializar motor aquí para evitar conflictos)
         self.tts_enabled = config.ENABLE_TTS
         self.is_speaking = False
+        
+        # 🆕 Control de memoria y rendimiento
+        self.frame_count = 0
+        self.cleanup_interval = config.FRAME_CLEANUP_INTERVAL
     
     def recv(self, frame):
         """
@@ -127,9 +132,31 @@ class SignLanguageProcessor(VideoProcessorBase):
         img = frame.to_ndarray(format="bgr24")
         
         # Procesar con MediaPipe
-        image_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        # Optimización: Redimensionar si es necesario para acelerar la inferencia
+        if img.shape[1] > config.MAX_VIDEO_WIDTH:
+            scale = config.MAX_VIDEO_WIDTH / img.shape[1]
+            new_height = int(img.shape[0] * scale)
+            img_proc = cv2.resize(img, (config.MAX_VIDEO_WIDTH, new_height))
+        else:
+            img_proc = img
+
+        image_rgb = cv2.cvtColor(img_proc, cv2.COLOR_BGR2RGB)
         image_rgb.flags.writeable = False
-        results = self.holistic.process(image_rgb)
+        
+        # Lógica de Frame Skipping
+        should_process = True
+        if config.ENABLE_FRAME_SKIP:
+            # Procesar solo si es el frame correcto o si no tenemos resultados previos
+            if self.frame_count % config.FRAME_SKIP_RATE != 0 and self.last_results is not None:
+                should_process = False
+                results = self.last_results
+            else:
+                should_process = True
+        
+        if should_process:
+            results = self.holistic.process(image_rgb)
+            self.last_results = results
+        
         image_rgb.flags.writeable = True
         
         # Extraer keypoints
@@ -143,6 +170,13 @@ class SignLanguageProcessor(VideoProcessorBase):
         
         # Actualizar contador de frames
         self.frames_since_last_prediction += 1
+        self.frame_count += 1
+        
+        # Limpieza periódica de memoria
+        if self.frame_count % self.cleanup_interval == 0:
+            # Forzar garbage collection periódico
+            import gc
+            gc.collect()
         
         # Sistema de tolerancia
         if self.hands_detected and self.hands_quality >= config.MIN_HANDS_QUALITY:
@@ -342,6 +376,15 @@ class SignLanguageProcessor(VideoProcessorBase):
         
         thread = threading.Thread(target=speak, daemon=True)
         thread.start()
+    
+    def cleanup(self):
+        """Libera recursos de MediaPipe para prevenir memory leaks"""
+        try:
+            if hasattr(self, 'holistic') and self.holistic is not None:
+                self.holistic.close()
+                self.holistic = None
+        except Exception as e:
+            print(f"[WARN] Error al liberar recursos de MediaPipe: {e}")
 
 # ============================================================================
 # INTERFAZ DE USUARIO
@@ -464,17 +507,17 @@ def main():
                 col1, col2, col3 = st.columns(3)
                 
                 with col1:
-                    if st.button("🔊 Reproducir", type="primary", use_container_width=True, key="btn_play"):
+                    if st.button("🔊 Reproducir", type="primary", width='stretch', key="btn_play"):
                         processor.speak_accumulated_signs()
                         st.success("Reproduciendo...")
                 
                 with col2:
-                    if st.button("⬅️ Borrar Última", use_container_width=True, key="btn_remove"):
+                    if st.button("⬅️ Borrar Última", width='stretch', key="btn_remove"):
                         processor.remove_last_sign()
                         st.rerun()
                 
                 with col3:
-                    if st.button("🗑️ Limpiar Buffer", use_container_width=True, key="btn_clear"):
+                    if st.button("🗑️ Limpiar Buffer", width='stretch', key="btn_clear"):
                         processor.clear_sign_buffer()
                         st.rerun()
             else:
@@ -486,10 +529,12 @@ def main():
                 st.markdown("### 📜 Historial de Sesión")
                 st.caption(f"Total de señas detectadas: {len(history)}")
                 
-                # Mostrar últimas 10 señas del historial
+                # Mostrar últimas 20 señas del historial
                 with st.expander("Ver historial completo", expanded=False):
+                    # Convertir deque a lista para permitir slicing
+                    history_list = list(history)
                     # Mostrar en orden inverso (más reciente primero)
-                    for i, sign in enumerate(reversed(history[-20:])):
+                    for i, sign in enumerate(reversed(history_list[-20:])):
                         col1, col2 = st.columns([3, 1])
                         with col1:
                             st.text(f"{len(history)-i}. {sign['label']}")
@@ -501,10 +546,8 @@ def main():
                     processor.clear_session_history()
                     st.rerun()
             
-            # Auto-refresh cada 1 segundo si hay actividad
-            if webrtc_ctx.state.playing:
-                import time as time_module
-                time_module.sleep(1)
+            # Botón manual de actualización (reemplaza auto-rerun para evitar consumo de memoria)
+            if st.button("🔄 Actualizar Buffer", key="btn_refresh", help="Actualiza manualmente el buffer de señas"):
                 st.rerun()
         else:
             st.info("▶️ Inicia la cámara para comenzar")

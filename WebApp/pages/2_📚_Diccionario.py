@@ -180,7 +180,7 @@ def main():
             )
         with col2:
             st.markdown("<br>", unsafe_allow_html=True)
-            translate_btn = st.button("🔄 Traducir", type="primary", use_container_width=True)
+            translate_btn = st.button("🔄 Traducir", type="primary", width='stretch')
         
         # Mostrar traducción
         if translate_btn and text_input:
@@ -222,7 +222,7 @@ def main():
                         else:
                             char, img_path = item
                             # Responsive: 40px móvil, 50px tablet, 60px desktop
-                            st.image(img_path, use_container_width=True)
+                            st.image(img_path, width='stretch')
                 
                 # Mostrar caracteres faltantes
                 if missing_chars:
@@ -273,7 +273,7 @@ def main():
                                 # Centrar imagen usando columnas
                                 _, img_col, _ = st.columns([1, 2, 1])
                                 with img_col:
-                                    st.image(str(image_path), use_container_width=True)
+                                    st.image(str(image_path), width='stretch')
                             else:
                                 # Mostrar placeholder
                                 st.markdown(f"""
